@@ -1,0 +1,135 @@
+body {
+    font-family: "Lato", sans-serif;
+    transition: margin-left .5s;
+    margin: 0px;
+    padding: 0px;
+}
+
+h1, h2, h3 {
+    color: var(--hnn-violet);
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--hnn-violet);
+    /* overflow-x: hidden; */
+    overflow: hidden; 
+    transition: 0.3s;
+    padding-top: 10px;
+}
+
+.sidebar a, p {
+    padding: 8px 24px 8px 24px;
+    text-decoration: none;
+    font-size: 17px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.sidebar p {
+    margin: 0px;
+}
+
+.sidebar a:hover {
+    color: var(--hnn-yellow);
+}
+
+.topbar {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 0px;
+    border-bottom: 2.5px solid lightgrey;
+    width: 100%;
+}
+
+.openbtn {
+    font-size: 25px;
+    cursor: pointer;
+    background: none;
+    color: #bababa;
+    padding: 15px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    color: #444;
+}
+
+.fontsize-btn {
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    color: #bababa;
+    padding: 15px 15px;
+    border: none;
+}
+
+.fontsize-btn:hover {
+    color: #444;
+}
+
+#main {
+    transition: margin-left 0.5s;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#content-wrapper {
+    width: 100%;
+    max-width: 920px;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+#content {
+    padding: 10px;
+    width: 100%;
+    font-size: 20px;
+
+}
+
+#content p {
+    display: block;
+    color: #333;
+    font-size: inherit;
+    padding: 0px;
+    line-height: 1.6;
+    font-family: 'Merriweather', Georgia, serif;
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
+    white-space: normal;
+}
+    
+/* On smaller screens, where height is less than 450px, 
+   change the style of the sidenav */
+
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}
+
+/* Custom HNN colors */
+.hnn-blue { color: #1156A3; }
+.hnn-purple { color: #474095; }
+.hnn-violet { color: #812A89; }
+.hnn-yellow { color: #e5a734; }
+
+:root {
+    --hnn-blue: #1156A3;
+    --hnn-purple: #474095;
+    --hnn-violet: #812A89;
+    --hnn-yellow: #e5a734;
+}
