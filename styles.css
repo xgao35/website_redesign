@@ -52,6 +52,13 @@ h1, h2, h3 {
     width: 100%;
 }
 
+.topbar img {
+    height: 35px;
+    width: auto;
+    margin-left: auto;
+    padding: 0px 20px;
+}
+
 .openbtn {
     font-size: 25px;
     cursor: pointer;
