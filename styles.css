@@ -57,7 +57,7 @@ h1, h2, h3 {
     cursor: pointer;
     background: none;
     color: #bababa;
-    padding: 15px 15px;
+    padding: 0px 10px 2px 20px;
     border: none;
 }
 
@@ -70,7 +70,7 @@ h1, h2, h3 {
     cursor: pointer;
     background: none;
     color: #bababa;
-    padding: 15px 15px;
+    padding: 0px 10px;
     border: none;
 }
 
