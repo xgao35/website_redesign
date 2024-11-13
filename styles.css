@@ -33,6 +33,8 @@ h1, h2, h3 {
     display: block;
     transition: 0.3s;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sidebar p {
@@ -41,6 +43,21 @@ h1, h2, h3 {
 
 .sidebar a:hover {
     color: var(--hnn-yellow);
+}
+
+.submenu {
+    display: none; /* Hide submenu by default */
+    padding-left: 20px; /* Optional: Indentation for the submenu items */
+}
+
+.sidebar-list .submenu {
+    display: none;  /* Hide submenus by default */
+    margin-left: 0px;  /* Optional: indentation for submenu items */
+}
+
+.sidebar-list .submenu.open {
+    display: block;  /* Show the submenu when the 'open' class is added */
+    transition: max-height 0.3s ease-in-out; /* Smooth transition for showing */
 }
 
 .topbar {

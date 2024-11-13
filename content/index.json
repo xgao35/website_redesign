@@ -1,0 +1,9 @@
+{
+    "preface.md": "Preface",
+    "under_the_hood.md": [
+        "1. Under the Hood", {
+            "cortical_column_structure.md":"1.1 Cortical Column Structure",
+            "primary_electric_currents.md":"1.2 Calculation of Primary Electric Currents"
+        }
+    ]
+}
