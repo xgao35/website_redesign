@@ -26,37 +26,39 @@ def generate_navbar_html(files):
 
     tab = '\t\t'
 
-    def create_menu_item(file, label, tab):
+    def create_page_link(file, label, tab):
         return f'\n{tab}<a href="{file}">{label}</a>'
 
-    def create_menu_section(section_label):
+    def create_toggle_section(toggle_label):
         section = f'\n{tab}<div class="sidebar-list">' + \
                   f'\n{tab}\t<a id="sidebar-header" onclick="toggleSubmenu' + \
                   '(event)">' + \
-                  f'\n{tab}{tab}{section_label}' + \
+                  f'\n{tab}{tab}{toggle_label}' + \
                   f'\n{tab}\t</a>' + \
                   f'\n{tab}\t<div class="submenu">'
         return section
 
     def build_navbar(files):
-        items_html = ''
-        for key, value in files.items():
-            if isinstance(value, str):
-                # Basic menu item
-                items_html += create_menu_item(key, value, tab)
-            elif isinstance(value, list):
-                # Toggle section
-                section_label = value[0]
-                submenu = value[1]
-                items_html += create_menu_section(section_label)
-                # Now, add the child items directly under the parent item
-                for child_file, child_label in submenu.items():
-                    items_html += create_menu_item(child_file,
-                                                   child_label,
-                                                   tab+tab)
-                items_html += f'\n{tab}\t</div>'
-                items_html += f'\n{tab}</div>'
-        return items_html
+        navbar_html = ''
+        for section, contents in files.items():
+            # For pages that are not nested in a toggle
+            if isinstance(contents, str):
+                navbar_html += create_page_link(section, contents, tab)
+            # For pages that are nested in a toggle
+            elif isinstance(contents, list):
+                toggle_label = contents[0]
+                toggle_contents = contents[1]
+                # Add toggle <div> sections and link
+                navbar_html += create_toggle_section(toggle_label)
+                # Add pages under toggle
+                for sub_page, sub_name in toggle_contents.items():
+                    navbar_html += create_page_link(sub_page,
+                                                    sub_name,
+                                                    tab+tab)
+                # Close toggle <div> sections
+                navbar_html += f'\n{tab}\t</div>'
+                navbar_html += f'\n{tab}</div>'
+        return navbar_html
 
     html += build_navbar(files)
     html += '\n\t</div>'
