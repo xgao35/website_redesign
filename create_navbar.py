@@ -6,9 +6,9 @@ import json
 # %% ######################################################################
 # load page index .json file
 home = os.getcwd() + "/content"
-index = home + "/index.json"
+index_path = os.getcwd() + "/index.json"
 
-with open(index, 'r') as f:
+with open(index_path, 'r') as f:
     file = json.load(f)
 
 # %% ######################################################################
@@ -65,4 +65,4 @@ def generate_navbar_html(files):
     return html
 
 
-# print(generate_navbar_html(file))
+print(generate_navbar_html(file))
