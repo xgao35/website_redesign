@@ -27,6 +27,7 @@ def generate_navbar_html():
         md_pages = {}
         if path is None:
             path = os.path.join(os.getcwd(), "content")
+
         directories = os.listdir(path)
         for item in directories:
             item_path = os.path.join(path, item)
@@ -36,6 +37,7 @@ def generate_navbar_html():
             else:
                 if not item == "README.md" and item.endswith(".md"):
                     location = item_path.split(os.getcwd())[1]
+                    location = 'content' + location.split('content')[1]
                     location = location.split('.md')[0] + '.html'
                     md_pages[item] = location
 
