@@ -3,7 +3,6 @@ import os
 import json
 
 # %% ######################################################################
-home = os.getcwd() + "/content"
 
 
 def get_title(file_path):
@@ -36,11 +35,12 @@ def index_md_pages(path):
     return page_index
 
 
-indexed_pages = index_md_pages(home)
+def update_page_index():
+    home = os.getcwd() + "/content"
+    indexed_pages = index_md_pages(home)
+
+    with open('index.json', 'w', encoding='utf-8') as f:
+        json.dump(indexed_pages, f, ensure_ascii=False, indent=4)
 
 
-# %%
-
-with open('index.json', 'w', encoding='utf-8') as f:
-    json.dump(indexed_pages, f, ensure_ascii=False, indent=4)
-# %%
+# update_page_index()
