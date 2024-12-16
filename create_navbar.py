@@ -54,6 +54,7 @@ def generate_navbar_html():
         section = f'\n{indent}<div class="sidebar-list">' + \
                   f'\n{indent}\t<a id="sidebar-header"' + \
                     ' onclick="toggleSubmenu(event)">' + \
+                  f'\n{indent}<span class="toggle-icon">+</span>' + \
                   f'\n{indent}{indent}{toggle_label}' + \
                   f'\n{indent}\t</a>' + \
                   f'\n{indent}\t<div class="submenu">'
