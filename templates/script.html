@@ -75,13 +75,15 @@
     };
 
     function toggleSubmenu(event) {
-        const submenu = event.target.nextElementSibling; // Get the submenu for the clicked header
+        const header = event.target.closest('#sidebar-header'); // Get the clicked header
+        const submenu = header.nextElementSibling; // Get the submenu
+        const toggleIcon = header.querySelector('.toggle-icon'); // Get the icon
 
-        // If the submenu exists, toggle it
         if (submenu && submenu.classList.contains('submenu')) {
             submenu.classList.toggle('open'); // Toggle the 'open' class to control visibility
+            toggleIcon.textContent = submenu.classList.contains('open') ? '-' : '+'; // Update icon
         }
-    };
+    }
 
     // This function will add the full text to the title attribute for all anchor tags
     document.querySelectorAll('.sidebar a').forEach(anchor => {

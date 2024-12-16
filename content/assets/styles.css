@@ -110,7 +110,7 @@ code {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: var(--hnn-violet);
+    background-color: #88548c;
     /* overflow-x: hidden; */
     overflow: hidden; 
     transition: 0.3s;
@@ -135,6 +135,12 @@ code {
 
 .sidebar a:hover {
     color: var(--hnn-yellow);
+}
+
+.sidebar .toggle-icon {
+    float: right;
+    font-weight: bold;
+    transition: transform 0.3s;
 }
 
 .submenu {
