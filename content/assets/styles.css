@@ -1,17 +1,109 @@
+/* 
+# --------------------
+# Main HTML body 
+# -------------------- 
+*/
+
 body {
-    font-family: "Lato", sans-serif;
+    /* font-family: "Lato", sans-serif; */
+    font-family: 'Merriweather', Georgia, serif;
+    color: #333;
+    line-height: 1.6;
     transition: margin-left .5s;
     margin: 0px;
     padding: 0px;
 }
 
-h1, h2, h3 {
-    color: var(--hnn-violet);
+h1, h2, h3, h4 {
+    /* color: var(--hnn-violet); */
     font-family: "Fira Sans", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 
+a {
+    color: var(--hnn-violet);
+}
+
+a:hover {
+    color: var(--hnn-purple);
+  }
+
+#main {
+    transition: margin-left 0.5s;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#content-wrapper {
+    width: 100%;
+    max-width: 920px;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+#content {
+    padding: 10px;
+    width: 100%;
+    font-size: 20px;
+
+}
+
+#content p {
+    font-family: 'Merriweather', Georgia, serif;
+    display: block;
+    color: #333;
+    font-size: inherit;
+    padding: 0px;
+    line-height: 1.6;
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+#content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Inline code (single backtick) */
+code {
+    color: var(--hnn-violet);
+    background-color: #f6f8fa;
+    display: inline;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-size: 85%;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; 
+    font-weight: normal;
+    border: 1px solid #e1e4e8;
+  }
+  
+  /* Block code (triple backticks) */
+  pre code {
+    color: #24292e;
+    background-color: #f6f8fa;
+    display: block;
+    padding: 16px;
+    overflow-x: auto;
+    border-radius: 6px;
+    font-size: 85%;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    border: 1px solid #e1e4e8; /* Consistent border style */
+  }
+
+/* 
+# --------------------
+# Sidebar 
+# -------------------- 
+*/
+
 .sidebar {
+    font-family: "Lato", sans-serif;
     height: 100%;
     width: 0;
     position: fixed;
@@ -46,19 +138,25 @@ h1, h2, h3 {
 }
 
 .submenu {
-    display: none; /* Hide submenu by default */
-    padding-left: 20px; /* Optional: Indentation for the submenu items */
+    display: none; /* hide submenu by default */
+    padding-left: 20px; /* indentation for the submenu items */
 }
 
 .sidebar-list .submenu {
-    display: none;  /* Hide submenus by default */
-    margin-left: 0px;  /* Optional: indentation for submenu items */
+    display: none;  /* hide submenus by default */
+    margin-left: 0px;  /* indentation for submenu items */
 }
 
 .sidebar-list .submenu.open {
-    display: block;  /* Show the submenu when the 'open' class is added */
-    transition: max-height 0.3s ease-in-out; /* Smooth transition for showing */
+    display: block;  /* show the submenu when the 'open' class is added */
+    transition: max-height 0.3s ease-in-out; /* smooth transition */
 }
+
+/* 
+# --------------------
+# Topbar
+# -------------------- 
+*/
 
 .topbar {
     height: 50px;
@@ -76,6 +174,9 @@ h1, h2, h3 {
     padding: 0px 20px;
 }
 
+/* Collapse navbar */
+/* --------------- */
+
 .openbtn {
     font-size: 25px;
     cursor: pointer;
@@ -89,6 +190,9 @@ h1, h2, h3 {
 .openbtn:hover {
     color: #444;
 }
+
+/* Change font size */
+/* ---------------- */
 
 .dropdown {
     height: inherit;
@@ -140,58 +244,26 @@ h1, h2, h3 {
 .fontsize-btn:hover {
     color: #444;
 }
-
-#main {
-    transition: margin-left 0.5s;
-    padding: 0px;
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#content-wrapper {
-    width: 100%;
-    max-width: 920px;
-    padding: 0 40px;
-    box-sizing: border-box;
-}
-
-#content {
-    padding: 10px;
-    width: 100%;
-    font-size: 20px;
-
-}
-
-#content p {
-    display: block;
-    color: #333;
-    font-size: inherit;
-    padding: 0px;
-    line-height: 1.6;
-    font-family: 'Merriweather', Georgia, serif;
-    overflow-wrap: break-word; 
-    word-wrap: break-word;
-    white-space: normal;
-}
-
-#content img {
-    max-width: 100%;
-    height: auto; /* Keeps the aspect ratio intact */
-    display: block;
-    margin: 0 auto; /* Centers the image horizontally */
-}
     
-/* On smaller screens, where height is less than 450px, 
-   change the style of the sidenav */
+/* 
+# --------------------
+# Responsiveness
+# -------------------- 
+*/
 
 @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}
     .sidebar a {font-size: 18px;}
 }
 
+/* 
+# --------------------
+# Variables 
+# -------------------- 
+*/
+
 /* Custom HNN colors */
+/* ----------------- */
 .hnn-blue { color: #1156A3; }
 .hnn-purple { color: #474095; }
 .hnn-violet { color: #812A89; }
