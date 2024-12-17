@@ -161,6 +161,32 @@ Dr. Stephanie Jones at Brown University
     document.querySelectorAll('.sidebar a').forEach(anchor => {
         anchor.setAttribute('title', anchor.textContent);
     });
+
+    // This function will update the sidebar links when a page is loaded
+    // locally so that sidebar naivagation remains functional without the
+    // need for a server
+    // Note: This should work for Mac/Linux but may not on Windows
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.location.protocol === "file:") {
+            // get the current local directory path
+            const currentDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+
+            // get 'absolute' links with root of 'website_redesign'
+            const links = document.querySelectorAll("#mySidebar a");
+            links.forEach(link => {
+                const href = link.getAttribute("href");
+
+                if (href && href.startsWith("/")) {
+                    // extract the local root directory
+                    const rootPath = currentDir.split("/website_redesign/")[0];
+                    // prepend root path to link
+                    const resolvedHref = "file://" + rootPath + href;
+                    link.setAttribute("href", resolvedHref);
+                }
+            });
+        }
+    });
+
 </script>
 
 </body>
