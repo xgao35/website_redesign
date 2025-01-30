@@ -1,9 +1,17 @@
-name: Build and Deploy
+name: Build and Deploy (TESTING)
+
+# All commented-out lines will need to be un-commented before merging. These are currently commented
+# out for debugging and testing during the actual PR, which, obviously, involves changes to this
+# workflow itself.
 
 on:
+  # push:
+  #   branches:
+  #     - main
   push:
-    branches:
-      - main
+    branches: ['**']
+  pull_request:
+    branches: ['**']
 
 jobs:
   build:
@@ -12,24 +20,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
+      - name: Create and activate conda environment
+        uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: '3.x'
-    
-      - name: Install Pandoc
-        run: sudo apt-get update && sudo apt-get install -y pandoc
-
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          activate-environment: website-redesign
+          environment-file: environment.yml
 
       - name: Build Website
         run: python build.py
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: .
