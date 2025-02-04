@@ -1,17 +1,9 @@
-name: Build and Deploy (TESTING)
-
-# All commented-out lines will need to be un-commented before merging. These are currently commented
-# out for debugging and testing during the actual PR, which, obviously, involves changes to this
-# workflow itself.
+name: Build and Deploy
 
 on:
-  # push:
-  #   branches:
-  #     - main
   push:
-    branches: ['**']
-  pull_request:
-    branches: ['**']
+    branches:
+      - main
 
 jobs:
   build:
@@ -32,8 +24,8 @@ jobs:
       - name: Build Website
         run: python build.py
 
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: .
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
