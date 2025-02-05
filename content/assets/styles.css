@@ -70,13 +70,6 @@ a:hover {
     margin: 0 auto;
 }
 
-.stylefig {
-  text-align:center;
-  max-width:650px;
-  margin-left:auto;
-  margin-right:auto;
-}
-
 /* Inline code (single backtick) */
 code {
     color: var(--hnn-violet);
