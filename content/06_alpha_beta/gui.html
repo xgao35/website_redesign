@@ -470,7 +470,8 @@ introduced in two places: the spike train start time for each bursting
 cell is sampled from a normal distribution with mean “Start time mean
 (ms)” and standard deviation “Start time stdev (ms)” and the inter-burst
 intervals for each bursting cell are sampled from a normal distribution
-of mean <span class="math inline">$\frac{1}{Burst frequency}$</span>
+of mean
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mn>1</mn><mrow><mi>B</mi><mi>u</mi><mi>r</mi><mi>s</mi><mi>t</mi><mi>f</mi><mi>r</mi><mi>e</mi><mi>q</mi><mi>u</mi><mi>e</mi><mi>n</mi><mi>c</mi><mi>y</mi></mrow></mfrac><annotation encoding="application/x-tex">\frac{1}{Burst frequency}</annotation></semantics></math>
 (e.g., a 100 ms inter-burst interval corresponds to a “Burst frequency”
 of 10 Hz) and standard deviation “Burst stdev (ms)” (see <a
 href="#figure-3">Figure 3</a>). Also note that the number of spikes per
@@ -959,12 +960,13 @@ menu <code>bursty2 (distal)</code></p>
 create higher synchrony in the timing of the distal input bursts. Under
 both the Layer 2/3 and Layer 5 tabs, increase the postsynaptic condances
 weights of the AMPA synapses onto the Layer 2/3 and Layer 5 pyramidal
-neurons from 5.4e-5 <span
-class="math inline"><em>μ</em><em>S</em></span> to 6e-5 <span
-class="math inline"><em>μ</em><em>S</em></span>. Both of these changes
-will cause the distal input burst to push a greater amount of current
-flow down the pyramidal neuron dendrites. The “Rhythmic Distal Input”
-dialog windows should look as shown below.</p>
+neurons from 5.4e-5
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">\mu S</annotation></semantics></math>
+to 6e-5
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">\mu S</annotation></semantics></math>.
+Both of these changes will cause the distal input burst to push a
+greater amount of current flow down the pyramidal neuron dendrites. The
+“Rhythmic Distal Input” dialog windows should look as shown below.</p>
 <div class="stylefig">
 <table>
 <h3 id="figure-21">Figure 21</h3>
@@ -1031,11 +1033,13 @@ processes.</p>
 as follows. Under the timing tab, change the Burst stdev value back to
 20 ms. Under both the Layer 2/3 and Layer 5 tabs, increase the
 postsynaptic conductance weights of the AMPA synapses onto the Layer 2/3
-and Layer 5 pyramidal neurons from 6e-5 <span
-class="math inline"><em>μ</em><em>S</em></span> to 40e-5 <span
-class="math inline"><em>μ</em><em>S</em></span> (a big change that will
-provide enough current to cause the cells to spike). The “Rhythmic
-Distal Input” dialog windows should look as shown below.</p>
+and Layer 5 pyramidal neurons from 6e-5
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">\mu S</annotation></semantics></math>
+to 40e-5
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">\mu S</annotation></semantics></math>
+(a big change that will provide enough current to cause the cells to
+spike). The “Rhythmic Distal Input” dialog windows should look as shown
+below.</p>
 <section id="figure-24" class="stylefig">
 <h3>Figure 24</h3>
 <p><img src="images/image25.png" /></p>
@@ -1051,14 +1055,14 @@ below.</p>
 are once again wider corresponding to less synchronous input and
 comparable to those shown in the example in Step 3. However, in this
 case the postsynaptic conductance of these driving spike is
-significantly larger (40e-5 <span
-class="math inline"><em>μ</em><em>S</em></span>). This strong input
-induces spiking activity in the pyramidal neuron on several cycles of
-the drive (2.5 shown here) resulting in a sharp and rapidly oscillating
-dipole waveform. The corresponding dipole spectrogram shows broadband
-spiking from ~60-120 Hz. This type of activity is not typically seen in
-EEG or MEG data, and hence unlikely to underlie macroscale
-recordings.</p>
+significantly larger (40e-5
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">\mu S</annotation></semantics></math>).
+This strong input induces spiking activity in the pyramidal neuron on
+several cycles of the drive (2.5 shown here) resulting in a sharp and
+rapidly oscillating dipole waveform. The corresponding dipole
+spectrogram shows broadband spiking from ~60-120 Hz. This type of
+activity is not typically seen in EEG or MEG data, and hence unlikely to
+underlie macroscale recordings.</p>
 <p>We can verify that the neurons are spiking by looking at the spiking
 raster plots. To do so, navigate to <code>Visualization</code> tab,
 click the <code>Layout template</code> dropdown menu and select
