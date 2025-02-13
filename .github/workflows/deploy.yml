@@ -24,7 +24,7 @@ jobs:
       - name: Modify .gitignore
         run: |
           # Remove the line that ignores HTML files in the content directory
-          sed -i '/content\/\*\*\/\.html/d' .gitignore
+          grep -v '^content/\*\*/\*.html$' .gitignore > .gitignore.tmp && mv .gitignore.tmp .gitignore
           cat .gitignore
 
       - name: Build Website
