@@ -77,6 +77,7 @@
     });
 
     // Open the sidebar on page load
+    // -----------------------------
     window.onload = function() {
         // Set initial styles for open state without animation
         const sidebar = document.getElementById("mySidebar");
@@ -94,40 +95,6 @@
         }, 10);
     }
 
-    function increaseFontSize() {
-        event.stopPropagation();  // Prevent dropdown from closing
-        const content = document.getElementById("content");
-        const currentSize = window.getComputedStyle(content).fontSize;
-        content.style.fontSize = (parseFloat(currentSize) + 2) + "px";
-    }
-
-    function decreaseFontSize() {
-        event.stopPropagation();  // Prevent dropdown from closing
-        const content = document.getElementById("content");
-        const currentSize = window.getComputedStyle(content).fontSize;
-        content.style.fontSize = (parseFloat(currentSize) - 2) + "px";
-    }
-
-    // Dropdown for font buttons
-    function toggleDropdown() {
-        const dropdownContent = document.querySelector('.dropdown-content');
-        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-    }
-
-    // Open/close dropdown on click of the button
-    document.getElementById('dropdownButton').onclick = function(event) {
-        event.stopPropagation();  // Prevent the click from triggering the window.onclick event
-        toggleDropdown();
-    };
-
-    // Close dropdown if clicking outside
-    window.onclick = function(event) {
-        const dropdownContent = document.querySelector('.dropdown-content');
-        if (!event.target.closest('.dropdown')) {  // Close if click outside the dropdown
-            dropdownContent.style.display = 'none';
-        }
-    };
-
     function toggleSubmenu(event) {
         const header = event.target.closest('#sidebar-header'); // Get the clicked header
         const submenu = header.nextElementSibling; // Get the submenu
@@ -139,6 +106,8 @@
         }
     }
 
+    // Resolve sidebar links for local development
+    // -------------------------------------------
     // This function will update the sidebar links when a page is loaded
     // locally so that sidebar naivagation remains functional without a server
     // Note: this solution is specific to MacOS
@@ -177,48 +146,8 @@
         }
     });
 
-    // ----------------------------------------
-    // Toggle between light and dark themes
-    // ----------------------------------------
-    // Wait for the DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', () => {
-        const themeToggle = document.querySelector('.theme-toggle');
-        const sidebar = document.querySelector('.sidebar');
-        const sunSVG = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
-            </svg>
-        `;
-        const moonSVG = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                <path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path>
-            </svg>
-        `;
-
-        // Check the saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.classList.toggle('dark-mode', savedTheme === 'dark');
-            themeToggle.innerHTML = savedTheme === 'dark' ? moonSVG : sunSVG;
-            sidebar.classList.toggle('dark-mode', savedTheme === 'dark');
-        } else {
-            // Default to light theme if no saved preference
-            themeToggle.innerHTML = sunSVG;
-        }
-
-        // Add click event to toggle theme
-        themeToggle.addEventListener('click', () => {
-            const isDarkMode = document.body.classList.toggle('dark-mode');
-            themeToggle.innerHTML = isDarkMode ? moonSVG : sunSVG;
-            sidebar.classList.toggle('dark-mode', isDarkMode);
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        });
-    });
-
-    // -------------------------------
     // Custom tooltips for the sidebar
     // -------------------------------
-
     // Flag to track tooltip visibility
     let isTooltipVisible = false;
 
@@ -284,8 +213,8 @@
         });
     });
 
-    // Function to close all open submenus in the navbar
-    // --------------------------------------------------
+    // Close all open submenus in the sidebar
+    // --------------------------------------
     document.addEventListener("DOMContentLoaded", function() {
         // Function to close all open submenus in the navbar
         function closeAllSubmenus() {
@@ -307,6 +236,109 @@
                 closeAllSubmenus(); // Close all open submenus when the icon is clicked
             });
         }
+    });
+
+    // Keep the current page open in the sidebar
+    // -----------------------------------------
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the full path relative to the 'content' folder
+        const currentPage = window.location.pathname.split("/content/")[1].split("?")[0];
+
+        // Find the active link using the full path
+        const activeLink = document.querySelector(`#mySidebar a[href$='${currentPage}']`);
+
+        if (activeLink) {
+            // Apply the active class
+            activeLink.classList.add("active");
+             // Find the closest submenu
+            const submenu = activeLink.closest('.submenu');
+
+            if (submenu) {
+                // Keep the submenu open
+                submenu.classList.add('open');
+                const toggleIcon = submenu.previousElementSibling.querySelector('.toggle-icon');
+
+                if (toggleIcon) {
+                    // Ensure the toggle icon reflects the open state
+                    toggleIcon.textContent = '-';
+                }
+            }
+        }
+    });
+
+    // ------------------------------
+    // Font size buttons and dropdown
+    // ------------------------------
+    function increaseFontSize() {
+        event.stopPropagation();  // Prevent dropdown from closing
+        const content = document.getElementById("content");
+        const currentSize = window.getComputedStyle(content).fontSize;
+        content.style.fontSize = (parseFloat(currentSize) + 2) + "px";
+    }
+
+    function decreaseFontSize() {
+        event.stopPropagation();  // Prevent dropdown from closing
+        const content = document.getElementById("content");
+        const currentSize = window.getComputedStyle(content).fontSize;
+        content.style.fontSize = (parseFloat(currentSize) - 2) + "px";
+    }
+
+    // Dropdown for font buttons
+    function toggleDropdown() {
+        const dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Open/close dropdown on click of the button
+    document.getElementById('dropdownButton').onclick = function(event) {
+        event.stopPropagation();  // Prevent the click from triggering the window.onclick event
+        toggleDropdown();
+    };
+
+    // Close dropdown if clicking outside
+    window.onclick = function(event) {
+        const dropdownContent = document.querySelector('.dropdown-content');
+        if (!event.target.closest('.dropdown')) {  // Close if click outside the dropdown
+            dropdownContent.style.display = 'none';
+        }
+    };
+
+    // ----------------------------------------
+    // Toggle between light and dark themes
+    // ----------------------------------------
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeToggle = document.querySelector('.theme-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const sunSVG = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
+            </svg>
+        `;
+        const moonSVG = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                <path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path>
+            </svg>
+        `;
+
+        // Check the saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+            themeToggle.innerHTML = savedTheme === 'dark' ? moonSVG : sunSVG;
+            sidebar.classList.toggle('dark-mode', savedTheme === 'dark');
+        } else {
+            // Default to light theme if no saved preference
+            themeToggle.innerHTML = sunSVG;
+        }
+
+        // Add click event to toggle theme
+        themeToggle.addEventListener('click', () => {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            themeToggle.innerHTML = isDarkMode ? moonSVG : sunSVG;
+            sidebar.classList.toggle('dark-mode', isDarkMode);
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
     });
 
 </script>
@@ -348,25 +380,6 @@
             // Remove unwanted leading/trailing whitespace or newlines
             block.textContent = block.textContent.trim();
         });
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const currentPage = window.location.pathname.split("/").pop(); // Get current page filename
-
-        // Find the active link
-        const activeLink = document.querySelector(`#mySidebar a[href$='${currentPage}']`);
-        if (activeLink) {
-            activeLink.classList.add("active"); // Apply the active class
-
-            const submenu = activeLink.closest('.submenu'); // Find the closest submenu
-            if (submenu) {
-                submenu.classList.add('open'); // Keep the submenu open
-                const toggleIcon = submenu.previousElementSibling.querySelector('.toggle-icon');
-                if (toggleIcon) {
-                    toggleIcon.textContent = '-'; // Ensure the toggle icon reflects the open state
-                }
-            }
-        }
     });
 
 </script>
