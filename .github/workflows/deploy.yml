@@ -24,6 +24,11 @@ jobs:
       - name: Build Website
         run: python build.py
 
+      - name: Set up Git user
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Add generated HTML files to git
         run: |
           git add -f content/**/*.html
