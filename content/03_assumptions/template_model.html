@@ -475,16 +475,18 @@ Driving Inputs</a></h4>
                     tooltip.classList.add('sidebar-tooltip');  // Use the existing class
                     tooltip.innerText = tooltipText;
 
-                    // Append the tooltip to the body (outside sidebar)
-                    document.body.appendChild(tooltip);
+                    // Append the tooltip to the sidebar container
+                    const sidebarContainer = document.querySelector('.sidebar');
+                    sidebarContainer.appendChild(tooltip);
 
-                    // Get the position of the link
+                    // Get the position of the link and the sidebar container
                     const rect = event.target.getBoundingClientRect();
-                    
-                    // Position the tooltip based on the link's position
+                    const sidebarRect = sidebarContainer.getBoundingClientRect();
+
+                    // Position the tooltip relative to the sidebar container
                     tooltip.style.position = 'absolute';
-                    tooltip.style.left = `${rect.left + window.scrollX + 20}px`;
-                    tooltip.style.top = `${rect.bottom + window.scrollY}px`;  // Adjust with spacing
+                    tooltip.style.left = `${rect.left - sidebarRect.left + 20}px`;
+                    tooltip.style.top = `${rect.bottom - sidebarRect.top + 5}px`;
 
                     // Make sure the tooltip is visible
                     tooltip.style.opacity = '1';
