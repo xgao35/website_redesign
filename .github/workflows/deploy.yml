@@ -21,19 +21,14 @@ jobs:
           activate-environment: website-redesign
           environment-file: environment.yml
 
+      - name: Modify .gitignore
+        run: |
+          # Remove the line that ignores HTML files in the content directory
+          sed -i '/content\/\*\*\/\.html/d' .gitignore
+          cat .gitignore
+
       - name: Build Website
         run: python build.py
-
-      - name: Set up Git user
-        run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "GitHub Actions"
-
-      - name: Add generated HTML files to git
-        run: |
-          git add -f content/**/*.html
-          git commit -m "Add generated HTML files" || echo "No changes to commit"
-          git push origin main:gh-pages --force
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
