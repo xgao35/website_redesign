@@ -174,9 +174,6 @@ def generate_page_html(page_paths):
             1
         )
 
-        if 'preface.md' in path:
-            print(markdown_text)
-
         # convert markdown to html with pypandoc
         # ------------------------------------------------------------
         converted_html = pypandoc.convert_text(
