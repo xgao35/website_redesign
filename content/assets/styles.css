@@ -80,8 +80,10 @@ a:hover {
 
 /* Inline code (single backtick) */
 code {
-    color: var(--hnn-violet);
-    background-color: #f6f8fa;
+    /* color: #ba83be !important; */
+    color: var(--hnn-violet) !important;
+    background: none !important;
+    /* background-color: #fff !important; */
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     display: inline;
@@ -90,20 +92,33 @@ code {
     font-size: 85%;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; 
     font-weight: normal;
-    border: 1px solid #e1e4e8;
+    border: 2px solid #e1e4e8;
+}
+
+body.dark-mode code {
+    color: #ba83be !important;
+    border: solid 2px #ba83be;
 }
   
   /* Block code (triple backticks) */
   pre code {
-    color: #24292e;
-    background-color: #f6f8fa;
+    color: #24292e !important;
+    background-color: none '!important';
     display: block;
     padding: 16px;
     overflow-x: auto;
     border-radius: 6px;
-    font-size: 85%;
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-    border: 1px solid #e1e4e8; /* Consistent border style */
+    font-family: 'Courier New', monospace;
+    border: solid 2px #ba83be;
+    border-radius: 5px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+body.dark-mode pre code {
+    background-color: #313438 !important;
+    color: #fff !important;
+    text-shadow: none !important;
 }
 
 /* 
@@ -262,8 +277,6 @@ code {
 .collapse-icon:hover {
     fill: var(--hnn-yellow);
 }
-
-
 
 /* 
 # --------------------
@@ -470,10 +483,10 @@ body.dark-mode #content-wrapper a:hover {
     color: var(--hnn-violet);
 }
 
-body.dark-mode code {
+/* body.dark-mode code {
     color: var(--hnn-violet);
     background-color: #d3d3d3;
-}
+} */
 
 .sidebar.dark-mode {
     background-color: #313438;
@@ -582,6 +595,40 @@ body.dark-mode .dropdown-content::before {
 .fontsize-btn:hover {
     color: #444;
 }
+
+/* 
+# --------------------
+# Callout box
+# -------------------- 
+*/
+
+.callout {
+    background-color: rgb(251, 237, 237);
+    padding: 2px; /* Padding around the callout */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px;
+    margin: 1.2em 0; /* Margin for spacing */
+  }
+  
+.callout-table {
+    width: 100%; 
+    border-collapse: collapse; /* Prevent double borders */
+    margin: 0;
+}
+
+.emoji-cell {
+    width: 5px; 
+    vertical-align: top !important; 
+    text-align: justify !important;
+    padding-right: 20px;
+}
+
+.text-cell {
+    color: rgb(85, 85, 85);
+    vertical-align: top !important;
+    text-align: justify !important;
+    padding-right: 20px;
+}  
 
 /* 
 # --------------------
