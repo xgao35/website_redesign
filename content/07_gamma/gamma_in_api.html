@@ -287,30 +287,6 @@ params = read_params(params_fname)
 print(params['gbar_L*'])
     </code>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        {
-    &quot;gbar_L2Basket_L2Basket&quot;: 0.01,
-    &quot;gbar_L2Basket_L2Pyr_gabaa&quot;: 0.007,
-    &quot;gbar_L2Basket_L2Pyr_gabab&quot;: 0.0,
-    &quot;gbar_L2Basket_L5Pyr&quot;: 0.0,
-    &quot;gbar_L2Pyr_L2Basket&quot;: 0.0012,
-    &quot;gbar_L2Pyr_L2Pyr_ampa&quot;: 0.0,
-    &quot;gbar_L2Pyr_L2Pyr_nmda&quot;: 0.0,
-    &quot;gbar_L2Pyr_L5Basket&quot;: 0.0,
-    &quot;gbar_L2Pyr_L5Pyr&quot;: 0.0,
-    &quot;gbar_L5Basket_L5Basket&quot;: 0.0075,
-    &quot;gbar_L5Basket_L5Pyr_gabaa&quot;: 0.08,
-    &quot;gbar_L5Basket_L5Pyr_gabab&quot;: 0.0,
-    &quot;gbar_L5Pyr_L5Basket&quot;: 0.00091,
-    &quot;gbar_L5Pyr_L5Pyr_ampa&quot;: 0.0,
-    &quot;gbar_L5Pyr_L5Pyr_nmda&quot;: 0.0
-}
-
-    </div>
-</div>
 <div class='markdown-cell'>
     <p>We'll next add a tonic Poisson-distributed excitation to pyramidal
 cells</p>
@@ -358,49 +334,6 @@ scaling_factor = 30000
 dpls = [dpl.scale(scaling_factor) for dpl in dpls]  # scale in place
     </code>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
-Loading custom mechanism files from /usr/share/miniconda/envs/website-redesign/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Building the NEURON model
-
-        [Done]
-Trial 1: 0.03 ms...
-Trial 1: 10.0 ms...
-
-        Trial 1: 20.0 ms...
-Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
-Trial 1: 50.0 ms...
-
-        Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
-Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
-Trial 1: 100.0 ms...
-
-        Trial 1: 110.0 ms...
-Trial 1: 120.0 ms...
-Trial 1: 130.0 ms...
-
-        Trial 1: 140.0 ms...
-Trial 1: 150.0 ms...
-Trial 1: 160.0 ms...
-Trial 1: 170.0 ms...
-Trial 1: 180.0 ms...
-Trial 1: 190.0 ms...
-
-        Trial 1: 200.0 ms...
-Trial 1: 210.0 ms...
-
-        Trial 1: 220.0 ms...
-Trial 1: 230.0 ms...
-Trial 1: 240.0 ms...
-
-    </div>
-</div>
 <div class='markdown-cell'>
     <p>Take a look at how different cell types respond to the exogenous
 drive. Note the periodic firing pattern of all cell types. While the
@@ -415,16 +348,6 @@ cells reach firing threshold.</p>
 
 plt.show()
     </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
-<div class='output-cell'>
-    <img src='output_nb_plot_simulate_gamma/fig_01.png'/>
 </div>
 <div class='markdown-cell'>
     <p>To confirm that the periodicity observed in the firing patterns
@@ -469,18 +392,11 @@ dpls[trial_idx].plot_tfr_morlet(
     show=False,
 )
 
+# adjust the bounds of the x axis in the spectrogram
+axes[1].set_xlim(tmin, 250)
+
 plt.show()
     </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        &lt;Figure size 600x600 with 3 Axes&gt;
-    </div>
-</div>
-<div class='output-cell'>
-    <img src='output_nb_plot_simulate_gamma/fig_02.png'/>
 </div>
 <div class='markdown-cell'>
     <p>Now, let us try to re-run the simulation with a tonic bias applied to
@@ -504,62 +420,12 @@ dpls = simulate_dipole(
 dpls = [dpl.scale(scaling_factor) for dpl in dpls]  # scale in place
     </code>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
-Building the NEURON model
-
-        [Done]
-Trial 1: 0.03 ms...
-
-        Trial 1: 10.0 ms...
-Trial 1: 20.0 ms...
-Trial 1: 30.0 ms...
-
-        Trial 1: 40.0 ms...
-Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
-Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
-Trial 1: 100.0 ms...
-Trial 1: 110.0 ms...
-Trial 1: 120.0 ms...
-
-        Trial 1: 130.0 ms...
-Trial 1: 140.0 ms...
-Trial 1: 150.0 ms...
-Trial 1: 160.0 ms...
-Trial 1: 170.0 ms...
-Trial 1: 180.0 ms...
-Trial 1: 190.0 ms...
-Trial 1: 200.0 ms...
-Trial 1: 210.0 ms...
-
-        Trial 1: 220.0 ms...
-Trial 1: 230.0 ms...
-Trial 1: 240.0 ms...
-
-    </div>
-</div>
 <div class='code-cell'>
     <code class='language-python'>
         _ = dpls[trial_idx].plot()
 
 plt.show()
     </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
-<div class='output-cell'>
-    <img src='output_nb_plot_simulate_gamma/fig_03.png'/>
 </div>
 <div class='markdown-cell'>
     <p>Notice that the Layer 5 pyramidal neurons now fire nearly
@@ -577,16 +443,6 @@ of synchronous rhythm is sometimes referred to as “strong” PING.</p>
 
 plt.show()
     </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
-<div class='output-cell'>
-    <img src='output_nb_plot_simulate_gamma/fig_04.png'/>
 </div>
 <div class='markdown-cell'>
     <p>Although the simulated dipole signal demonstrates clear periodicity,
@@ -607,16 +463,6 @@ _ = plot_psd(
 plt.show()
     </code>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
-<div class='output-cell'>
-    <img src='output_nb_plot_simulate_gamma/fig_05.png'/>
-</div>
 <div class='markdown-cell'>
     <p>Finally, we demonstrate the mechanistic link between PING and the
 GABAA decay time constant (<code>tau2</code>). Using the same
@@ -635,46 +481,6 @@ dpls = simulate_dipole(
 )
 dpls = [dpl.scale(scaling_factor) for dpl in dpls]  # scale in place
     </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
-Building the NEURON model
-
-        [Done]
-Trial 1: 0.03 ms...
-
-        Trial 1: 10.0 ms...
-Trial 1: 20.0 ms...
-Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
-
-        Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
-Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
-Trial 1: 100.0 ms...
-Trial 1: 110.0 ms...
-Trial 1: 120.0 ms...
-
-        Trial 1: 130.0 ms...
-Trial 1: 140.0 ms...
-Trial 1: 150.0 ms...
-Trial 1: 160.0 ms...
-Trial 1: 170.0 ms...
-Trial 1: 180.0 ms...
-Trial 1: 190.0 ms...
-Trial 1: 200.0 ms...
-
-        Trial 1: 210.0 ms...
-Trial 1: 220.0 ms...
-Trial 1: 230.0 ms...
-Trial 1: 240.0 ms...
-
-    </div>
 </div>
 <div class='markdown-cell'>
     <p>This change will shorten the effective refactory period between L5
@@ -710,18 +516,11 @@ dpls[trial_idx].plot_tfr_morlet(
     show=False,
 )
 
+# adjust the bounds of the x axis in the spectrogram
+axes[2].set_xlim(tmin, 250)
+
 plt.show()
     </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        &lt;Figure size 600x600 with 4 Axes&gt;
-    </div>
-</div>
-<div class='output-cell'>
-    <img src='output_nb_plot_simulate_gamma/fig_06.png'/>
 </div><div class='markdown-cell'>
     <h2>References</h2>
 <p>[1] Lee, S. &amp; Jones, S. R. Distinguishing mechanisms of gamma
