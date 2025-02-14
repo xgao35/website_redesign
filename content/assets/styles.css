@@ -160,7 +160,7 @@ code {
 
 /* Style active page in sidebar */
 .sidebar a.active {
-    color: var(--hnn-yellow); 
+    color: #fff; 
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 6px;
@@ -168,7 +168,7 @@ code {
 }
 
 .sidebar a.active:hover {
-    color: #fff;
+    color: var(--hnn-yellow);
 }
 
 /* Custom tooltip */
