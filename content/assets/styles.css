@@ -601,12 +601,26 @@ body.dark-mode .dropdown-content::before {
 */
 
 .callout {
-    background-color: rgb(251, 237, 237);
+    background-color: #fedfdf;
     padding: 2px; /* Padding around the callout */
     border-radius: 5px; /* Rounded corners */
     padding: 10px;
     margin: 1.2em 0; /* Margin for spacing */
-  }
+}
+
+.callout code {
+    border: 2px solid #ba83be;
+}
+
+body.dark-mode .callout {
+    /* background-color: rgb(251, 237, 237); */
+    background-color: #313438;
+    padding: 2px; /* Padding around the callout */
+    border-radius: 5px; /* Rounded corners */
+    border: 2px solid #ff7777;
+    padding: 10px;
+    margin: 1.2em 0; /* Margin for spacing */
+}
   
 .callout-table {
     width: 100%; 
@@ -622,7 +636,6 @@ body.dark-mode .dropdown-content::before {
 }
 
 .text-cell {
-    color: rgb(85, 85, 85);
     vertical-align: top !important;
     text-align: justify !important;
     padding-right: 20px;
