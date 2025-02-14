@@ -62,7 +62,8 @@
     "07_gamma": [
         "7. Simulating Gamma Rhythms",
         {
-            "01_gamma_in_gui.md": "7.1 GUI Tutorial of Gamma Rhythms"
+            "01_gamma_in_gui.md": "7.1 GUI Tutorial of Gamma Rhythms",
+            "02_gamma_in_api.md": "7.2 API Tutorial of Gamma Rhythms"
         }
     ],
     "08_data_to_simulation": [
