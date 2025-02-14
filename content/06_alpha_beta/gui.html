@@ -1511,8 +1511,8 @@ href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 
                     // Position the tooltip relative to the sidebar container
                     tooltip.style.position = 'absolute';
-                    tooltip.style.left = `${rect.left - sidebarRect.left + 20}px`;
-                    tooltip.style.top = `${rect.bottom - sidebarRect.top + 5}px`;
+                    tooltip.style.left = `${rect.left - sidebarRect.left + sidebarContainer.scrollLeft + 20}px`;
+                    tooltip.style.top = `${rect.bottom - sidebarRect.top + sidebarContainer.scrollTop + 5}px`;
 
                     // Make sure the tooltip is visible
                     tooltip.style.opacity = '1';
