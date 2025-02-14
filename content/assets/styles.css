@@ -80,10 +80,8 @@ a:hover {
 
 /* Inline code (single backtick) */
 code {
-    /* color: #ba83be !important; */
-    color: var(--hnn-violet) !important;
-    background: none !important;
-    /* background-color: #fff !important; */
+    color: var(--hnn-violet);
+    background: none;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     display: inline;
@@ -96,14 +94,14 @@ code {
 }
 
 body.dark-mode code {
-    color: #ba83be !important;
+    color: #ba83be;
     border: solid 2px #ba83be;
 }
   
   /* Block code (triple backticks) */
   pre code {
-    color: #24292e !important;
-    background-color: none '!important';
+    color: #24292e;
+    background-color: none;
     display: block;
     padding: 16px;
     overflow-x: auto;
@@ -116,9 +114,9 @@ body.dark-mode code {
 }
 
 body.dark-mode pre code {
-    background-color: #313438 !important;
-    color: #fff !important;
-    text-shadow: none !important;
+    background-color: #313438;
+    color: #fff;
+    text-shadow: none;
 }
 
 /* 
@@ -760,8 +758,8 @@ body.dark-mode .dropdown-content::before {
     border-radius: 5px;
     border: solid 2px #ba83be;
     overflow: hidden;
-    /* overflow-y: hidden;
-    overflow-x: scroll; */
+    /* overflow-y: hidden; */
+    /* overflow-x: scroll; */
 }
 
 /* code cells */
@@ -769,7 +767,6 @@ body.dark-mode .dropdown-content::before {
     /* box-sizing: border-box !important; */
     display: block;
     background-color: #fff;
-    color: #3b3b3b;
     padding: 15px 30px;
     margin: 0px;
     font-size: 0.85em;
