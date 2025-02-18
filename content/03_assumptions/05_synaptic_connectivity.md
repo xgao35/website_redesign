@@ -6,10 +6,6 @@
     # Dylan Daniels
 -->
 
----
-link-citations: true
----
-
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/03_architecture-connectivity/03_architecture-connectivity -->
 
 # 3.5 Synaptic Connectivity

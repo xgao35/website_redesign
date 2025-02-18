@@ -6,10 +6,6 @@
     # Dylan Daniels
 -->
 
----
-link-citations: true
----
-
 # Event Related Potentials (ERPs)
 
 ## Getting Started

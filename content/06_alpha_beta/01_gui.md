@@ -6,10 +6,6 @@
     # Dylan Daniels
 -->
 
----
-link-citations: true
----
-
 DEBUG: this markdown file and images originally adapted from https://github.com/jonescompneurolab/hnn-tutorials/tree/core-gui/coregui_alpha_and_beta
 
 # Alpha (7-14 Hz) and Beta (15-29 Hz) Rhythms: The Mu-Complex
