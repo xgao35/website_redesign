@@ -15,11 +15,22 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Create and activate conda environment
+      - name: Set Up Conda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          activate-environment: website-redesign
-          environment-file: environment.yml
+          auto-activate-base: false
+
+      - name: Create Conda Environment With MPI
+        run: make create-conda-env-mpi
+
+      - name: Test MPI
+        run: |
+          conda run -n website-redesign-mpi \
+          mpiexec -np 2 nrniv -mpi -python -c '
+          from neuron import h;
+          from mpi4py import MPI;
+          print(f"Hello from proc {MPI.COMM_WORLD.Get_rank()}");
+          h.quit()'
 
       - name: Modify .gitignore
         run: |
@@ -28,9 +39,10 @@ jobs:
           cat .gitignore
 
       - name: Build Website
-        run: python build.py
+        run: conda run -n website-redesign-mpi env PYTHONUNBUFFERED=1 python build.py
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
