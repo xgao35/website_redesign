@@ -439,12 +439,19 @@ def convert_notebooks_to_html(
     # create a copy of the hashes to update and save
     updated_hashes = notebook_hashes.copy()
 
+    # get list of notebooks to skip
+    with open(
+        os.path.join(os.getcwd(), 'scripts', 'notebooks_to_skip.json'), 'r',
+    ) as f:
+        notebooks_to_skip = json.load(f)
+    notebooks_to_skip = notebooks_to_skip['skip_execution']
+
     # iterate through input directory and process notebooks
     for root, list_folders, list_files in os.walk(input_folder):
         for filename in list_files:
             if filename.endswith(".ipynb"):
                 print(
-                    f"Processing notebook: {filename}"
+                    f"\nProcessing notebook: {filename}"
                 )
 
                 # get current hash of the notebook
@@ -463,12 +470,22 @@ def convert_notebooks_to_html(
                     filename,
                 )
 
+                # check if notebook should be skipped
+                skip_notebook = False
+                if filename in notebooks_to_skip:
+                    skip_notebook = True
+
                 # for cases where the hash has not changed
-                if (filename in notebook_hashes) and \
+                if skip_notebook:
+                    print(
+                        f"Notebook '{filename}' has been flagged to be"
+                        " skipped. Execution will not be attempted for"
+                        " this notebook."
+                    )
+                elif (filename in notebook_hashes) and \
                         (notebook_hashes[filename] == current_hash):
 
-                    # check if notebook has been fully executed from start
-                    # to finish
+                    # check if notebook has been fully executed
                     if not notebook_executed:
                         print(
                             f"Warning: Notebook {filename} has not been"
@@ -493,8 +510,8 @@ def convert_notebooks_to_html(
                             f"Notebook {filename} is unchanged and already"
                             " fully executed"
                         )
-                # if the file has been changed or a hash hasn't yet been
-                # recorded, execute the notebook and update the hash dict
+                # if the file is new (unhashed) or has been changed, execute
+                # the notebook and update the hash dict
                 else:
                     print(
                         f"Notebook {filename} is new or has been updated and"
@@ -511,15 +528,15 @@ def convert_notebooks_to_html(
                         notebook_executed = is_notebook_fully_executed(
                             loaded_notebook
                         )
-                        if notebook_executed:
-                            # update the hash dictionary if the notebook
-                            # was fully executed from start to finish
-                            updated_hashes[filename] = current_hash
+
                     else:
                         print(
                             "Skipping notebook execution since"
                             " execute_notebook is False"
                         )
+
+                # update the hash dictionary
+                updated_hashes[filename] = current_hash
 
                 # extract and process the html from the notebook
                 html_content = extract_html_from_notebook(
@@ -569,10 +586,10 @@ def convert_notebooks_to_html(
                 # ----------------------------------------
 
                 print(
-                    f"Successfully converted '{filename}'to html\n"
+                    f"Successfully converted '{filename}'to html"
                 )
 
-                if not notebook_executed:
+                if not skip_notebook and not notebook_executed:
                     print(
                         f"Warning: the html and json outputs for '{filename}'"
                         " may be incomplete."
