@@ -290,7 +290,7 @@ def generate_page_html(page_paths):
 content_path = os.path.join(os.getcwd(), "content")
 hash_path = os.path.join(os.getcwd(), "scripts", "notebook_hashes.json")
 
-_ = convert_notebooks_to_html(
+convert_notebooks_to_html(
     input_folder=content_path,
     hash_path=hash_path,
     write_html=True,

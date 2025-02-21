@@ -8,7 +8,10 @@ import nbformat
 # import markdown
 import hashlib
 import pypandoc
-from nbconvert.preprocessors import ExecutePreprocessor
+from nbconvert.preprocessors import (
+    ExecutePreprocessor,
+    ClearOutputPreprocessor,
+)
 
 
 def save_plot_as_image(img_data, img_filename, output_dir):
@@ -316,11 +319,32 @@ def extract_html_from_notebook(
 
 
 def hash_notebook(notebook_path):
-    """Generate a SHA256 hash of the notebook"""
+    """Generate a SHA256 hash of the notebook, ignoring outputs/metadata."""
+
+    with open(notebook_path, "r", encoding="utf-8") as f:
+        nb = nbformat.read(f, as_version=4)
+
+    # clear all cell outputs
+    preprocessor = ClearOutputPreprocessor()
+    preprocessor.preprocess(nb, {})
+
+    # remove execution counts and cell metadata
+    for cell in nb.cells:
+        if "execution_count" in cell:
+            cell["execution_count"] = None
+        if "metadata" in cell:
+            cell["metadata"] = {}
+
+    # remove notebook metadata
+    nb.metadata = {}
+
+    # serialize cleaned notebook
+    notebook_json = nbformat.writes(nb, version=4).encode("utf-8")
+
+    # generate hash
     hasher = hashlib.sha256()
-    with open(notebook_path, "rb") as f:
-        while chunk := f.read(8192):
-            hasher.update(chunk)
+    hasher.update(notebook_json)
+
     return hasher.hexdigest()
 
 
@@ -364,13 +388,47 @@ def get_notebook(
     return notebook
 
 
+def is_notebook_fully_executed(notebook):
+    """
+    Check if a notebook object has been fully executed.
+    Returns True if all code cells have an associated execution_count.
+    """
+    for cell in notebook.get("cells", []):
+        if cell.get("cell_type") == "code" and \
+                cell.get("execution_count") is None:
+            return False
+    return True
+
+
+def notebook_has_json_output(
+        root,
+        filename
+        ):
+    """
+    Check if the notebook has been fully executed by checking against the
+    json output file.
+    """
+    json_path = os.path.join(root, f"{os.path.splitext(filename)[0]}.json")
+    execution_check = False
+
+    if os.path.exists(json_path):
+        with open(json_path, 'r') as file:
+            nb_outputs = json.load(file)
+            execution_check = nb_outputs.get('full_executed', False)
+
+    return execution_check
+
+
 def convert_notebooks_to_html(
         input_folder=None,
         use_base64=False,
         write_html=False,
+        execute_notebooks=False,
         hash_path="notebook_hashes.json",
         ):
-    """Executes and converts .ipynb files in the input folder to HTML."""
+    """
+    Executes and converts .ipynb files in the input folder to HTML.
+    """
 
     if not input_folder:
         input_folder = os.getcwd().split('scripts')[0]
@@ -393,38 +451,86 @@ def convert_notebooks_to_html(
                 nb_path = os.path.join(root, filename)
                 current_hash = hash_notebook(nb_path)
 
-                # skip execution if the notebook hasn't changed, comparing
-                # the current hash with the previously-saved hash
+                # get the notebook without executing it
+                loaded_notebook = get_notebook(
+                    nb_path,
+                    execute=False,
+                )
+
+                # check if the notebook has been fully executed
+                notebook_executed = notebook_has_json_output(
+                    root,
+                    filename,
+                )
+
+                # for cases where the hash has not changed
                 if (filename in notebook_hashes) and \
                         (notebook_hashes[filename] == current_hash):
-                    print(
-                        f"Skipping execution of unchanged notebook: {filename}"
-                    )
-                    executed_notebook = get_notebook(
-                        nb_path,
-                        execute=False,
-                    )
+
+                    # check if notebook has been fully executed from start
+                    # to finish
+                    if not notebook_executed:
+                        print(
+                            f"Warning: Notebook {filename} has not been"
+                            " fully executed."
+                        )
+                        if execute_notebooks:
+                            loaded_notebook = get_notebook(
+                                nb_path,
+                                execute=True,
+                            )
+                            print('Notebook has been executed')
+                            notebook_executed = is_notebook_fully_executed(
+                                loaded_notebook
+                            )
+                        else:
+                            print(
+                                "Notebook execution skipped since"
+                                " execute_notebooks is False."
+                            )
+                    else:
+                        print(
+                            f"Notebook {filename} is unchanged and already"
+                            " fully executed"
+                        )
                 # if the file has been changed or a hash hasn't yet been
                 # recorded, execute the notebook and update the hash dict
                 else:
                     print(
-                        "New or changed notebook detected. Executing "
-                        f"the notebook: {filename}"
+                        f"Notebook {filename} is new or has been updated and"
+                        " needs to be executed"
                     )
-                    executed_notebook = get_notebook(
-                        nb_path,
-                        execute=True,
-                    )
-                    # update the hash dictionary
-                    updated_hashes[filename] = current_hash
+                    if execute_notebooks:
+                        loaded_notebook = get_notebook(
+                            nb_path,
+                            execute=True,
+                        )
+                        print(
+                            "Notebook has been executed"
+                        )
+                        notebook_executed = is_notebook_fully_executed(
+                            loaded_notebook
+                        )
+                        if notebook_executed:
+                            # update the hash dictionary if the notebook
+                            # was fully executed from start to finish
+                            updated_hashes[filename] = current_hash
+                    else:
+                        print(
+                            "Skipping notebook execution since"
+                            " execute_notebook is False"
+                        )
 
+                # extract and process the html from the notebook
                 html_content = extract_html_from_notebook(
-                    executed_notebook,
+                    loaded_notebook,
                     root,
                     filename,
                     use_base64,
                 )
 
+                # optionally write the converted notebook to a
+                # standalone html file
                 if write_html:
                     output_file = os.path.join(
                         root, f"{os.path.splitext(filename)[0]}.html"
@@ -444,15 +550,17 @@ def convert_notebooks_to_html(
                 # .md file would inject only the .html for those header
                 # sections into your html output file
 
-                # flat json
                 nb_html_json = html_to_json(
                     html_content,
                     filename,
                 )
-                # nested json
-                # nb_html_json = structure_json(
-                #     nb_html_json
-                # )
+
+                # Add execution status directly to json output
+                nb_html_json = {
+                    "full_executed": notebook_executed,
+                    **nb_html_json,
+                }
+
                 output_json = os.path.join(
                     root, f"{os.path.splitext(filename)[0]}.json"
                 )
@@ -460,7 +568,18 @@ def convert_notebooks_to_html(
                     json.dump(nb_html_json, f, indent=4)
                 # ----------------------------------------
 
-                print(f"Successfully converted '{filename}'to html\n")
+                print(
+                    f"Successfully converted '{filename}'to html\n"
+                )
+
+                if not notebook_executed:
+                    print(
+                        f"Warning: the html and json outputs for '{filename}'"
+                        " may be incomplete."
+                        "\nPlease re-run the script with"
+                        " 'execute_notebooks=True' to ensure that the"
+                        " notebook outputs are correct."
+                    )
 
     # save updated hashes
     save_notebook_hashes(
@@ -468,7 +587,7 @@ def convert_notebooks_to_html(
         hash_path,
     )
 
-    return html
+    return
 
 
 # %%
