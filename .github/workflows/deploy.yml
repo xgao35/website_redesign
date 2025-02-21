@@ -39,7 +39,7 @@ jobs:
           cat .gitignore
 
       - name: Build Website
-        run: conda run -n website-redesign-mpi env PYTHONUNBUFFERED=1 python build.py
+        run: conda run -n website-redesign-mpi env PYTHONUNBUFFERED=1 python build.py --execute-notebooks
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
