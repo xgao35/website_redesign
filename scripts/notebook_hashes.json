@@ -1,5 +1,11 @@
 {
     "plot_simulate_evoked.ipynb": "f0f03a44a988ab6457d5530bc769da23f8c40ab154572bcae5dd884a5a5cad48",
     "api_alpha_beta.ipynb": "e30edc63f4b41c50c38c5609c0fe940e9766035f44b4f0e4fa4f92ff323cddaa",
-    "plot_simulate_gamma.ipynb": "2ca4d7c91574033e97f9a303e23860610e18c5d37b24d7e38ee00166d7debabe"
+    "plot_simulate_gamma.ipynb": "2ca4d7c91574033e97f9a303e23860610e18c5d37b24d7e38ee00166d7debabe",
+    "plot_hnn_animation.ipynb": "80c40850e36681b9f5a39ac9ade11d77b5abfd38c9a86f3cc2cc7347da0f8ea7",
+    "plot_firing_pattern.ipynb": "cb476a6dee578ada1e730f0b50a963f0d628fd99883facb06365d7e3294d4637",
+    "plot_connectivity.ipynb": "3970b99dcb1708082ae40465eb7daa10ec325a75e74f1842c597814414c6f96d",
+    "plot_batch_simulate.ipynb": "cf5daa829ca59c84199a3e54ccd09a6f00b87d85aba191aaf5352bc8ddedd9d2",
+    "plot_record_extracellular_potentials.ipynb": "af225d36ce0efb5fd4743cfafb5eaa57767c0e9171260f2dd39c23f851f0bfc1",
+    "plot_simulate_beta.ipynb": "08493ec6fbff2847e24e2be3d1c75ddb8b89b8b460f58bf67eff1c1f800aa564"
 }
