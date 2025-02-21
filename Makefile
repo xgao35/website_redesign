@@ -8,6 +8,9 @@ all: build
 build:
 	python build.py
 
+execute-notebooks:
+	python build.py --execute-notebooks
+
 clean:
 	rm -rf content/*.html
 	rm -rf content/*/*.html

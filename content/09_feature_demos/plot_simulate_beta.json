@@ -1,4 +1,5 @@
 {
+    "full_executed": false,
     "plot_simulate_beta.ipynb": {
         "05. Simulate beta modulated ERP": {
             "level": 1,

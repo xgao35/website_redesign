@@ -1,11 +1,11 @@
 {
-    "plot_simulate_evoked.ipynb": "f0f03a44a988ab6457d5530bc769da23f8c40ab154572bcae5dd884a5a5cad48",
-    "api_alpha_beta.ipynb": "ea0cd39e091495ab2df75a330e42b360912204bd24c7ecd093f78fa6bb300d6e",
-    "plot_simulate_gamma.ipynb": "2ca4d7c91574033e97f9a303e23860610e18c5d37b24d7e38ee00166d7debabe",
-    "plot_hnn_animation.ipynb": "80c40850e36681b9f5a39ac9ade11d77b5abfd38c9a86f3cc2cc7347da0f8ea7",
-    "plot_firing_pattern.ipynb": "cb476a6dee578ada1e730f0b50a963f0d628fd99883facb06365d7e3294d4637",
-    "plot_connectivity.ipynb": "3970b99dcb1708082ae40465eb7daa10ec325a75e74f1842c597814414c6f96d",
-    "plot_batch_simulate.ipynb": "cf5daa829ca59c84199a3e54ccd09a6f00b87d85aba191aaf5352bc8ddedd9d2",
-    "plot_record_extracellular_potentials.ipynb": "af225d36ce0efb5fd4743cfafb5eaa57767c0e9171260f2dd39c23f851f0bfc1",
-    "plot_simulate_beta.ipynb": "08493ec6fbff2847e24e2be3d1c75ddb8b89b8b460f58bf67eff1c1f800aa564"
+    "plot_simulate_evoked.ipynb": "34ddc6063c4e9b586ac9eea5f019c26732b727113013ece16e4fdbe8689cc3ed",
+    "api_alpha_beta.ipynb": "568ea1e5ada637addbcf73bd68bb1f47954994723eaf8cc9481c1730d0099428",
+    "plot_simulate_gamma.ipynb": "2812c9e50f42cab94fc84b96995308852257c81ea04f0b2995ed45a8ff94fece",
+    "plot_hnn_animation.ipynb": "69b82ec7578a5a695f20db3e52963e38abb3bdded75dfcba2ee59451b09c9387",
+    "plot_firing_pattern.ipynb": "556402ac8e234bc39d121795e5996b417257940d4b36f0de8e1f6f71102ef602",
+    "plot_connectivity.ipynb": "2d9bcc19e1402ba61368425fb8900fb37645687e40614f32d4005ec89cd92565",
+    "plot_batch_simulate.ipynb": "043a50dd8c4a15ea9b6542400718d2cbbb8d9014912aad87142400eca496b7b7",
+    "plot_record_extracellular_potentials.ipynb": "9c28e89aabf1bec644fcddbd13ba346b96fe7c55c4a24faea131a05ca4c4b850",
+    "plot_simulate_beta.ipynb": "a53539c830adedd10456c229dff1cd7703650f06df6e9a6b68b0ab1c4cb9652b"
 }
