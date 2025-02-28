@@ -42,6 +42,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 450px;
 }
 
 #content-wrapper {
@@ -284,6 +285,7 @@ body.dark-mode pre code {
 
 .topbar {
     height: 50px;
+    min-width: inherit;
     display: flex;
     align-items: center;
     padding: 0 0px;
@@ -294,31 +296,17 @@ body.dark-mode pre code {
 
 }
 
+.topbar-logo-container {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 #topbar-logo {
     height: 30px;
-    width: auto;
-
-    /* Center img around topbar */
-    position: absolute;
-        /* requires 'position: relative' in .topbar */
-    left: 50%;
-    transform: translateX(-50%);
-        /*  'transform' offsets the image's width */
-
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-}
-
-.topbar:hover #topbar-logo {
-    opacity: 1; 
-}
-
-/* Hide the logo on smaller screens */
-@media (max-width: 600px) {
-    #topbar-logo {
-        display: none;
-    }
+    margin: auto;
+    padding: 0px 50px;
 }
 
 /* Social media icons */
