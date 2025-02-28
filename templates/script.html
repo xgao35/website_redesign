@@ -288,18 +288,38 @@
     // ------------------------------
     // Font size buttons and dropdown
     // ------------------------------
+    document.addEventListener("DOMContentLoaded", function() {
+        const content = document.getElementById("content");
+
+        // Retrieve and apply the saved font size
+        const savedFontSize = localStorage.getItem("fontSize");
+        if (savedFontSize && content) {
+            content.style.fontSize = savedFontSize + "px";
+        }
+    });
+
     function increaseFontSize() {
         event.stopPropagation();  // Prevent dropdown from closing
         const content = document.getElementById("content");
-        const currentSize = window.getComputedStyle(content).fontSize;
-        content.style.fontSize = (parseFloat(currentSize) + 2) + "px";
+        const currentSize = parseFloat(window.getComputedStyle(content).fontSize);
+        const newSize = currentSize + 1;
+
+        content.style.fontSize = newSize + "px";
+
+        // save font size to localStorage
+        localStorage.setItem("fontSize", newSize);
     }
 
     function decreaseFontSize() {
         event.stopPropagation();  // Prevent dropdown from closing
         const content = document.getElementById("content");
-        const currentSize = window.getComputedStyle(content).fontSize;
-        content.style.fontSize = (parseFloat(currentSize) - 2) + "px";
+        const currentSize = parseFloat(window.getComputedStyle(content).fontSize);
+        const newSize = currentSize - 1;
+
+        content.style.fontSize = newSize + "px";
+
+        // save font size to localStorage
+        localStorage.setItem("fontSize", newSize);
     }
 
     // Dropdown for font buttons
