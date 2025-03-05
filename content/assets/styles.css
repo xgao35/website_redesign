@@ -141,6 +141,15 @@ pre code {
 }
 
 /*
+    Element: .csl-entry
+    Desription: adjust spacing in the automatically-generated bibliography
+*/
+.csl-entry {
+    line-height: 1.4;
+    padding-bottom: 15px;
+}
+
+/*
 # Dark mode (alternative) styling for basic elemen
 # ------------------------------------------------------------ 
 */
