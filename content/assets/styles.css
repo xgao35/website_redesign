@@ -150,7 +150,10 @@ pre code {
 }
 
 /*
-    Testing
+    Element: .headerlink
+    Description: 
+        Style for the headerlink class that is automatically added to
+            each header via javascript
 */
 .headerlink {
     text-decoration: none;
