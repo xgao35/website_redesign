@@ -18,7 +18,7 @@ We have created Google CoLab notebooks that allows you to run HNN out of your br
 
 This is the quickest way to get up and running with HNN, though it does require a Google Account. If you do not have a Google account, you can either create one for free to run the notebook, or try one of the other installation methods listed below.
 
-To follow the tutorial, you'll also need to clone or download the [hnn-data repository](https://github.com/jonescompneurolab/hnn-data).
+To follow the examples in the textbook, you'll also need to clone or download the [hnn-data repository](https://github.com/jonescompneurolab/hnn-data).
 
 You can directly [download the hnn-data folder](https://github.com/jonescompneurolab/hnn-data/archive/refs/heads/main.zip). Alternatively, you can clone the repository.
 
@@ -26,10 +26,6 @@ You can directly [download the hnn-data folder](https://github.com/jonescompneur
 git clone https://github.com/jonescompneurolab/hnn-data.git
 ```
 
-
-
-
 ### Local Installation
-
-[Local Installation instructions](https://jonescompneurolab.github.io/hnn-core/stable/index.html) 
+For instructions on how to install HNN locally, please visit the [Install page of our API Documentation](https://jonescompneurolab.github.io/hnn-core/stable/index.html).
 
