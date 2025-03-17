@@ -10,13 +10,13 @@
 
 ## Getting Started
 
-In order to understand the workflow and initial parameter sets provided with this tutorial, we must first briefly describe prior studies that led to the creation of the provided data and evoked response parameter set that you will work with. This tutorial is based on results from our 2007 study where we recorded and simulated tactile evoked responses source localized to the primary somatosensory cortex (SI) [@jones_neural_2007].
+In order to understand the workflow and initial parameter sets provided with this tutorial, we must first briefly describe prior studies that led to the creation of the provided data and parameter set that you will work with. This tutorial is based on results from our 2007 study where we recorded and simulated tactile evoked responses source localized to the primary somatosensory cortex (SI) [@jones_neural_2007].
 
-In our 2007 study, we investigated the early evoked activity (0-175 ms) elicited by a brief tap to the D3 digit and source localized to an an equivalent current dipole in the contralateral hand area of the primary somatosensory cortex (SI) [@jones_neural_2007]. The strength of the tap was set at either suprathreshold (100% detection probability) or perceptual  threshold (50% detection) levels (see Figure 1, left panel below). Note, to be precise, this data represents source localized event related field (ERF) activity because it was collected using MEG. We use the terminology ERP for simplicity, since the primary current dipoles generating evoked fields and potentials are the same.
+In our 2007 study, we investigated the early evoked activity (0-175 ms) elicited by a brief tap to the D3 digit and source localized to an equivalent current dipole in the contralateral hand area of the primary somatosensory cortex (SI) [@jones_neural_2007]. The strength of the tap was set at either suprathreshold (100% detection probability) or perceptual  threshold (50% detection probability) (see Figure 1, left panel below). Note, to be precise, this data represents source localized event related field (ERF) activity because it was collected using MEG. We use the terminology ERP for simplicity, since the primary current dipoles generating evoked fields and potentials are the same.
 
-We found that we could reproduce evoked responses that accurately reflected the recorded waveform in our neocortical model from a layer specific sequence of exogenous excitatory synaptic drive to the local SI circuit, see Figure 1right panel below. This drive consisted of “feedforward” / proximal input at ~25 ms post-stimulus, followed by “feedback” / distal input at ~60 ms, followed by a subsequent “feedforward” / proximal input at ~125 ms (Gaussian distribution of input times on each simulated trial). This sequence of drive generated spiking activity and intracellular dendritic current flow in the pyramidal neuron dendrites to reproduce the current dipole signal. This sequence of drive can be interpreted as initial “feedforward” input from the lemniscal thalamus, followed by “feedback” input from higher order cortex or non-lemniscal thalamus, followed by a re-emergent leminsical thalamic drive. Intracranial recordings in non-human primates motivated and supported this assumption [@cauller_neural_1991].
+We found that we could reproduce evoked responses that accurately reflected the recorded waveform in our neocortical model from a layer specific sequence of exogenous excitatory synaptic drives to the local SI circuit (see Figure 1, right panel below). This drive consisted of a “feedforward” / proximal input at ~25 ms post-stimulus, a “feedback” / distal input at ~60 ms, and finally a subsequent “feedforward” / proximal input at ~125 ms (Gaussian distribution of input times on each simulated trial). This sequence of drive generated spiking activity and intracellular dendritic current flow in the pyramidal neuron dendrites to reproduce the current dipole signal. This sequence of drive can be interpreted as initial “feedforward” input from the lemniscal thalamus, followed by “feedback” input from higher order cortex or non-lemniscal thalamus, followed by a re-emergent leminsical thalamic drive. Intracranial recordings in non-human primates motivated and supported this assumption [@cauller_neural_1991].
 
-In our model, the exogenous driving inputs were simulated as predefined trains of action potentials (pre-synaptic spikes) that activated excitatory synapses in the local cortical circuit in proximal and distal projection patterns (i.e. feedforward, and feedback, respectively, as shown schematically in Figure 1 right, and in the HNN GUI Model Schematics). The number, timing and strength (post-synaptic conductance) of the driving spikes were manually adjusted in the model until a close representation of the data was found (all other model parameters were tuned and fixed based on the morphology, physiology and connectivity within layered neocortical circuits) [@jones_neural_2007]. Note, a scaling factor was applied to net dipole output to match to the magnitude of the recorded ERP data and used to predict the number of neurons contributing to the recorded ERP (purple circle, Figure 1, right panel). The dipole units were in nAm, with a one-to-one comparison between data and model output due to the biophysical detail in our model.
+In our model, the exogenous driving inputs were simulated as predefined trains of action potentials (pre-synaptic spikes) that activated excitatory synapses in the local cortical circuit in proximal and distal projection patterns (i.e. feedforward, and feedback, respectively, as shown schematically in Figure 1 right, and in the HNN GUI Model Schematics). The number, timing and strength (post-synaptic conductance) of the driving spikes were manually adjusted in the model until a close representation of the data was found (all other model parameters were tuned and fixed based on the morphology, physiology and connectivity within layered neocortical circuits) [@jones_neural_2007]. Note, a scaling factor was applied to net dipole output to match to the magnitude of the recorded ERP data and used to predict the number of neurons contributing to the recorded ERP (purple circle, Figure 1, right panel). The dipole units are in nAm, with a one-to-one comparison between data and model output due to the biophysical detail in our model.
 
 <div style="display:block; width:100%; margin: 0 auto;">
 
@@ -28,7 +28,9 @@ In our model, the exogenous driving inputs were simulated as predefined trains o
 Adapted from Jones et al. 2007 [@jones_neural_2007]. Comparison of SI evoked response in experiment and neural model simulation. Left: MEG data showing tactile evoked response (ERP) source localized to the hand area of SI. Red: suprathreshold stimulation; Blue: Threshold stimulation (avg. n=100 trials). Right: Neural model simulation depicting proximal/distal inputs needed to replicate the ERP waveform (avg. n=25 trials) 
 </p>
 
-In summary, to simulate the SI evoked response, a sequence of exogenous excitatory synaptic drive was simulated (by creating presynaptic spikes that activate layer specific synapses in the neocortical network) consisting of proximal drive at ~25 ms, followed by distal drive at ~60 ms, followed by a second proximal drive at ~122 ms. Given this background information, we can now walk you through the steps of simulating a similar ERP, using a subset of the data shown in Figure 1.
+In summary, to simulate the SI evoked response, a sequence of exogenous excitatory synaptic drive was simulated by creating presynaptic spikes that activate layer specific synapses in the neocortical network. This sequence of drives consists of a proximal drive at ~25 ms, a distal drive at ~60 ms, and a second proximal drive at ~122 ms. 
+
+In this tutorial, we will walk you through the steps of using HNN to simulate a similar ERP, using a subset of the data shown in Figure 1.
 
 ## Tutorial Table of Contents
 
@@ -48,13 +50,16 @@ In summary, to simulate the SI evoked response, a sequence of exogenous excitato
 
 An example ERP dataset is provided in the <a href="https://github.com/jonescompneurolab/hnn-data">hnn-data GitHub repository</a>. We use the data as an orienting example for where to begin to simulate an ERP. 
 
-This dataset represents early evoked activity (0-175 ms) from an equivalent current dipole source localized to the hand area of the primary somatosensory cortex (SI), elicited by a brief perceptual threshold level tap to the contralateral D3 digit (read Getting Started above for details). The example dataset provided was collected at 600Hz and contains only averaged data from 100 trials in which the tap was detected. (Note, when loading your own data, if it was not collected at 600Hz, you must first downsample to 600Hz to view it in the HNN GUI).
+This dataset represents early evoked activity (0-175 ms) from an equivalent current dipole source localized to the hand area of the primary somatosensory cortex (SI), elicited by a brief perceptual threshold level tap to the contralateral D3 digit (see [Getting Started](#getting-started) above for details). The example dataset provided was collected at 600Hz and contains only averaged data from 100 trials in which the tap was detected. (Note, when loading your own data, if it was not collected at 600Hz, you must first downsample to 600Hz to view it in the HNN GUI).
 
-To load and view this data, navigate to the main GUI window and on the bottom left corner click: `Load data`
+To load and view this data, navigate to the main GUI window and on the bottom left corner click:
+```
+Load data
+```
 
 If you have cloned the hnn-data repository, navigate to hnn-data folder on your desktop and select `MEG_detection_data/yes_trial_S1_ERP_all_avg.txt`. HNN will then load the data and display the waveform in the dipole window as shown below.
 
-Alternatively, if you have not cloned the hnn-data repository, you can download the file directly by clicking <a href="https://github.com/jonescompneurolab/hnn/blob/master/data/MEG_detection_data/yes_trial_S1_ERP_all_avg.txt">here</a>.
+Alternatively, if you have not cloned the hnn-data repository, you can directly download <a href="https://github.com/jonescompneurolab/hnn/blob/master/data/MEG_detection_data/yes_trial_S1_ERP_all_avg.txt">yes_trial_S1_ERP_all_avg.txt</a>.
 
 <div style="display:block; width:90%; margin: 0 auto;">
 
@@ -70,7 +75,9 @@ Note, the software can be used without loading data. If you wish to play with si
 
 ## 2. Load/view parameters to define network structure &  to “activate” the network
 
-An initial parameter set that will simulate the evoked drives that generate an evoked response in close agreement with the SI data described in Step 1 is distributed in the hnn-data repository.  Click on the `External drives` tab at the top of the GUI and then click the `Load external drives` button. Navigate to the `hnn-data/network-configurations` folder on your computer and select `ERPYes100Trials.json`, or <a href="https://github.com/jonescompneurolab/hnn/tree/master/param">download the parameter file</a> and load it into the GUI. 
+In the hnn-data repository, you can find an initial parameter set that will simulate the evoked response in close agreement with the SI data that we just loaded in Step 1.  Click on the `External drives` tab at the top of the GUI, then select `Load external drives`. Navigate to the `hnn-data/network-configurations` folder on your computer and select `ERPYes100Trials.json`.
+
+Alternatively, you can <a href="https://github.com/jonescompneurolab/hnn/tree/master/param">download ERPYes100Trials.json</a> and load it into the GUI. 
 
 <div style="display:block; width:90%; margin: 0 auto;">
 
@@ -80,11 +87,23 @@ An initial parameter set that will simulate the evoked drives that generate an e
 
 </div>
 
-The template cortical column networks structure for this simulation is described in the <a href="https://hnn.brown.edu/under-the-hood/">"HNN Template Model" page</a> on the hnn.brown.edu website. Several of the network parameter can be adjusted via the HNN GUI (e.g., local excitatory and inhibitory connection strengths) under the `Network connectivity` tab, but we will leave them fixed for this tutorial and only adjust the inputs that “activate” the network.
+The template cortical column networks structure for this simulation is described in <a href="../01_getting_started/02_template_model.md">HNN Template Model</a>. Several of the network parameter can be adjusted via the HNN GUI (e.g., local excitatory and inhibitory connection strengths) under the `Network connectivity` tab, but we will leave them fixed for this tutorial and only adjust the inputs that “activate” the network.
 
-The values of the parameters that you loaded to “activate” the network in a manner that will generate an evoked response can now be viewed under the `External drives` tab.   As described in the “Getting Started” section, the evoked response can be simulated with a sequence of exogenous driving inputs consisting of a proximal input at ~26 ms (evprox1), followed by a distal input at ~64 ms (evdist1), followed by a subsequent proximal input at ~137 ms (evprox). 
+You can view the parameters that you just loaded to “activate” the network under the `External drives` tab. As described in [Getting Started](../01_getting_started), the evoked response can be simulated with a sequence of exogenous driving inputs consisting of a proximal input at ~26 ms (evprox1), followed by a distal input at ~64 ms (evdist1), followed by a subsequent proximal input at ~137 ms (evprox2). 
 
-To see the detailed parameter values defining each of these drives click on the dropdown button next to the name of each drive.  Note: additional evoked proximal or distal inputs can be added to your simulation for your hypothesis testing goals by using the `Add drive` button and specifying the drive as "Evoked" and the location as either "proximal" or "distal". Other types of drives can also be defined including poisson, rhythmic, and tonic, as detailed in other tutorials.
+To see the detailed parameter values defining each of these drives, click on the dropdown button next to the name of each drive.  
+
+<div class="callout">
+  <table class="callout-table">
+    <tr>
+      <td class="emoji-cell">&#10071;</td>
+      <td class="text-cell">
+        Additional evoked proximal or distal inputs can also be added to your simulation for your hypothesis testing goals by using the "Add drive" button and specifying the drive as "Evoked" and the location as either "proximal" or "distal". Other types of drives can also be defined including poisson, rhythmic, and tonic, as detailed in other tutorials.
+    </td>
+      <td class="emoji-cell"> </td>
+    </tr>
+  </table>
+</div>
 
 <div style="display:block; width:90%; margin: 0 auto;">
 
@@ -94,41 +113,27 @@ To see the detailed parameter values defining each of these drives click on the 
 
 </div>
 
-<!-- <div class="stylefig">
-<table>
-<h3>Figure 4</h3>
-<tr>
-<td>
-<div style="max-width:500px;">
+Each evoked input consists of a Gaussian distributed train of presynaptic action potentials that will target all of the cells in the post-synaptic network, with several adjustable parameters, including the mean arrival and standard deviation of the time each spike activates the network (in milliseconds), the number of the driving spikes on each trial of the simulation, and a random number seed that enables reproducibility of simulation results across trials.  
 
-![Figure 4a](images/erp_fig_04_01.png)
-
-</div>
-</td>
-<td>
-<div style="max-width:500px;">
-
-![Figure 4a](images/erp_fig_04_02.png)
-
-</div>
-</td>
-</tr>
-</table>
-</div> -->
-
-Each evoked input consists of a Gaussian distributed train of presynaptic action potentials that will target all of the cells in the post-synaptic network, with several adjustable parameters, including  the mean arrival and standard deviation of the time each spike activates the network (in milliseconds), the number of the driving spikes on each trial of the simulation, and a random number seed that enables reproducibility of simulation results across trials.  You can also adjust the postsynaptic conductance of the drive onto the  postsynaptic cell. For example, under the "AMPA weights" section in the "evprox1" dropdown menu, the L5_pyramidal field represents the the post synaptic AMPA conductance of the proximal input onto the layer 5 pyramidal neuron at each location targeted by the proximal drive. For further details on the connectivity structure of the network, see the <a href="https://hnn.brown.edu/under-the-hood/">"HNN Template Model"</a> page.
-
+You can also adjust the postsynaptic conductance of the drive onto the  postsynaptic cell. For example, under the "AMPA weights" section in the "evprox1" dropdown menu, the L5_pyramidal field represents the the post synaptic AMPA conductance of the proximal input onto the layer 5 pyramidal neuron at each location targeted by the proximal drive. For further details on the connectivity structure of the network, see <a href="../01_getting_started/02_template_model.md">HNN Template Model</a>.
 
 
 <a id="toc_3"></a>
 
 ## 3. Running the simulation and visualizing net current dipole
 
-Now that we have an initial parameter set, we can run a simulation for a set number or trials. Let's start by defining 3 trials, by clicking on the `Simulation` tab and defining Trials=3.  On each simulated trial, the timings of the evoked inputs (i.e., spikes) are chosen from a Gaussian distribution with mean and stdev (standard deviation) as defined in the “Evoked drives” tap. Histograms of each of the evoked inputs will be displayed at the top of the Figure tab after the simulations run. 
+Now that we have an initial parameter set, we can run a simulation for a set number or trials. To get started, let's go to:
+```
+Simulation
+```
 
-Before running the simulation, we’ll first change the simulation name (i.e., the name under which the simulated data will be saved) to a new descriptive-name for the simulation here. Under the `Simulation` tab, change the name from "default" to "ERPyes-3trials". (Note that the default simulation is in fact 1 run of the "ERPyes" simulation.)  There are several other adjustable simulate parameters in the `Simulation` tab. These parameters control the duration (stop), integration time step (dt), number of trials (Trials), and the choice of the simulation backend of either MPI (parallel across neurons) or Joblib (parallel across trials), assuming both backends are installed. 
+Let's start by defining Trials = 3.  On each simulated trial, the timings of the evoked inputs (i.e., spikes) are chosen from a Gaussian distribution with mean and stdev (standard deviation) as defined in `Evoked drives`. Histograms of each of the evoked inputs will be displayed at the top of the Figure tab after the simulations are completed. 
 
-Hit the `Run` button to run the simulation. A simulation log is shown under the Run button that will tell you the status of your simulaion. 
+Before running the simulation, let's change the simulation name (i.e., the name under which the simulated data will be saved) to a new descriptive-name for the simulation here. Under the `Simulation` tab, change the name from "default" to "ERPyes-3trials". (Note that the default simulation is in fact 1 run of the "ERPyes" simulation.)  
+
+Other adjustable simulation parameters in the `Simulation` tab control the duration (stop), integration time step (dt), number of trials (Trials), and the choice of the simulation backend of either MPI (parallel across neurons) or Joblib (parallel across trials), assuming both backends are installed. 
+
+Hit the `Run` button to run the simulation. A simulation log is shown under the Run button that provides update on the status of your simulaion. 
 
 <div style="display:block; width:90%; margin: 0 auto;">
 
@@ -138,9 +143,9 @@ Hit the `Run` button to run the simulation. A simulation log is shown under the 
 
 </div>
 
-Once complete, a new Figure 2 window will appear showing the output of the simulation as in the figure below. The thin blue traces are net current dipole signals from individual trials while the thick blue trace is the average ERP, with histograms of the proximal and distal driving spikes shown above. 
+Once complete, a new Figure window will appear showing the output of the simulation. The thin blue traces are net current dipole signals from individual trials, and the thick blue trace is the average ERP, with histograms of the proximal and distal driving spikes shown above. 
 
-Next, let's create a new figure to view the simulation on top of the loaded data. Click on the `Visualization` tab and select the `[blank] 2row x 1col (1:3)` option from the `Layout template` dropdown menu, then select `Make figure`. 
+Next, let's create a new figure to compare the simulation to the experiment data. Let's click on the `Visualization` tab, go to the `Layout template` dropdown menu, select the `[blank] 2row x 1col (1:3)` option, then select `Make figure`. 
 
 You will see that our new figure has two subplots defined by ax0 and ax1, both of which are blank. Select the ax1 subplot and set the `Simution Data` to `ERPyes-3trials`. Set `Data to compare` to `yes_trial_S1_ERP_all_avg`, then click `Add plot`. 
 
@@ -156,9 +161,9 @@ Note you can change what is shown in either of these subplots by selecting `clea
 
 </div> 
 
-Importantly, note that a scaling factor of 3000.00 was multiplied by the net dipole produced by the model, as seen on the y-axis scale in the figure above. This scaling factor can be adjusted to match the magnitude of the recorded data; the value of 3000 is the default value for the loaded parameter set. In this case, since the template model contains 200 pyramidal neurons (PNs), the simulation predicts that the number of cells that contribute to the signal is 600,000 (200 x 3000) PNs.
+Importantly, note that a scaling factor of 3000.00 was multiplied by the net dipole produced by the model, as seen on the y-axis scale in the figure above. The scaling factor matches the magnitude of the simulation to the recorded data. Here, we use the value of 3000. Since our template model contains 200 pyramidal neurons (PNs), the scaling factor means that our simulation predicts that 600,000 (200 x 3000) PNs contriute to the recorded signal.
 
-Also note that in the ERP simulation shown, the raw dipole signal was smoothed using a Hamming filter using a window size of 30 milliseconds, in order to reduce noise in the ERP signal generated by this reduced network model. The level of smoothing can be adjusted by changing the value of the Dipole Smooth Window (ms). The longer the window, the more smoothing will occur. To turn off smoothing entirely, set the window size to 0. Below, we provide an example of the same simulation with smoothing turned off entirely. Note the higher-frequency content compared to the ERP simulation with smoothing turned on.
+Also note that in the ERP simulation shown, the raw dipole signal was smoothed using a Hamming filter using a window size of 30 milliseconds, in order to reduce noise in the ERP signal generated by this reduced network model. The level of smoothing can be adjusted by changing the value of `Dipole Smooth Window (ms)`. The longer the window, the more smoothing will occur. To turn off smoothing entirely, set the window size to 0. Below, we provide an example of the same simulation with smoothing turned off entirely. Note the higher-frequency content compared to the ERP simulation with smoothing turned on.
 
 <div style="display:block; width:90%; margin: 0 auto;">
 
@@ -233,7 +238,7 @@ Notice that when we simulated more trials, the RMSE between the data and the sim
 
 ## 6. Adjusting parameters
 
-Parameter adjustments will be key to developing and testing hypotheses on the circuit origin of your own ERP data. HNN is designed so that many of parameters in the model can be adjusted from the GUI (see Tour of the GUI). Here, we’ll walk through examples of how to adjust several “External drives" parameters to investigate how they impact the evoked response.
+Parameter adjustments will be key to developing and testing hypotheses on the circuit origin of your own ERP data. HNN is designed so that many of parameters in the model can be adjusted from the GUI. Here, we’ll walk through examples of how to adjust several “External drives" parameters to investigate how they impact the evoked response.
 
 **6.1 Changing the synchrony of the evoked inputs**
 
